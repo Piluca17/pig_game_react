@@ -3,8 +3,25 @@ import "./Player.css";
 function Player({ name, score, current, isActive }) {
   //const {name, score, current, isActive} = props
   //Los ids no los necesitamos porque son de javascript no de react
+
+  //  let classPlayer;
+  //  if (isActive) {
+  //    if (score>=100){
+  //      classPlayer = 'player player--winner'
+  // } else {
+  //    classPlayer = "player player--active";
+  //  } else {
+  //    classPlayer = "player";
+  //  }
+
+  const classPlayer = isActive
+    ? score > 10
+      ? "player player--winner"
+      : "player player--active"
+    : "player";
+
   return (
-    <section className="player player--0 player--active">
+    <section className={classPlayer}>
       <h2 className="name"> {name}</h2>
       <p className="score">{score}</p>
       <div className="current">
