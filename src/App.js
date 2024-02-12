@@ -1,6 +1,10 @@
-import "./App.css";
-import { useState, useEffect } from "react";
-import Player from "./Player/Player";
+import './App.css'
+import { useState, useEffect } from 'react'
+import Player from './Player/Player'
+
+
+
+// 3. pasar las variables de estado y las funciones a los componentes Player y Dice
 // 4. manejar los eventos de click en los botones de New game, Roll dice y Hold
 // 5. manejar el cambio de imagen de dado cuando se hace click en el botón rolldice
 // 5. manejar el cambio de jugador activo cuando se hace click en el botón Hold
@@ -10,70 +14,63 @@ import Player from "./Player/Player";
 // 9. manejar el cambio de jugador activo cuando se hace click en el botón New game
 
 function App() {
-  // Definir variables de estado usando useState (activePlayer, score, current, diceNumber)
-  const [activePlayer, setActivePlayer] = useState(1);
-  const [score, setScores] = useState([0, 0]);
-  const [current, setCurrent] = useState(0);
+  // 1. definir variables de estado usando useState (activePlayer, score, current, diceNumber)
+  const [activePlayer, setActivePlayer] = useState(1)
+  const [score, setScore] = useState([0, 0])
+  const [current, setCurrent] = useState(0)
+  const [diceNumber, setDiceNumber] = useState(0)
 
-  // Mandamos con el número, el número de la imagen del dado
-  const [diceNumber, setDiceNumber] = useState(0);
- 
   // 2. definir funciones para manejar los eventos de click (handleNewGame, handleRollDice, handleHold)
   const handleHold = () => {
-    setActivePlayer(activePlayer === 1 ? 2 : 1);
-    setCurrent(0);
-    // Para cambiar el score, se debe definir una variable nueva
-    // No modificar el array, si no que creamos uno nuevo.
-    // Saco los datos del array y los meto en uno nuevo
-    const newScore = [...score];
-    newScore[activePlayer - 1] += current;
-    setScores(newScore);
-    setActivePlayer(activePlayer === 1 ? 2 : 1);
-    setCurrent(0);
-  };
+    // para cambiar el score, se debe definir una nueva variable
+    // no modificamos el array, creamos uno nuevo!!!!
+    const newScore = [...score]
+    // newScore[activaPlayer -1] = newScore[activePlayer -1] + current
+    newScore[activePlayer - 1] += current
+    setScore(newScore)
+    setActivePlayer(activePlayer === 1 ? 2 : 1)
+    setCurrent(0)
+  }
   const handleNewGame = () => {
-    setActivePlayer(1);
-    setCurrent(0);
-    setDiceNumber(0);
-    setScores([0, 0]);
-  };
+    setActivePlayer(1)
+    setScore([0, 0])
+    setCurrent(0)
+    setDiceNumber(0)
+  }
+
   const handleRollDice = () => {
-    setDiceNumber(Math.floor(Math.random() * 6) + 1);
-  };
-  // Ver asincronia al recoger los datos
-  useEffect(
-    // Si el array está vacio, se ejecuta una sola vez
-    // Si hay algun dato, lo ejecutará cada vez y recogerá cada vez
-    () => {
-      if (diceNumber === 1) {
-        setActivePlayer((activePlayer) => (activePlayer === 1 ? 2 : 1));
-        setCurrent(0);
-      } else {
-        setCurrent((current) => current + diceNumber);
-      }
-    },
-    [diceNumber]
-  );
+    // const randomNumber = Math.floor(Math.random() * 6) + 1
+    // setDiceNumber(randomNumber)
+    setDiceNumber(Math.floor(Math.random() * 6) + 1)
+  }
+
+  useEffect(() => {
+    if (diceNumber === 1) {
+      setActivePlayer((activePlayer) => (activePlayer === 1 ? 2 : 1))
+      setCurrent(0)
+    } else {
+      // setCurrent (current + diceNumber)
+      setCurrent((current) => current + diceNumber)
+    }
+  }, [diceNumber])
+
+     const finishedPlaying = Math.max (...score) >= 10 ? true : false
   // 3. pasar las variables de estado y las funciones a los componentes Player y Dice
   return (
     <main>
       <Player
-        name="Player1"
-        // Devuelve el primer valor del array [0,0]
+        name="Player 1"
         score={score[0]}
         current={activePlayer === 1 && current}
         isActive={activePlayer === 1}
       />
       <Player
-        name="Player2"
-        // Devuelve el segundo valor del array [0,0]
+        name="Player 2"
         score={score[1]}
-        // Si se cumple && devuelve el ultimo valor, si no devuelve vacio. En este caso el que este activo devolvera current
         current={activePlayer === 2 && current}
         isActive={activePlayer === 2}
       />
       {diceNumber && (
-        // Si es falso no devuelve nada, cuando es todo verdadero, devuelve el texto de codigo
         <img
           src={`dice-${diceNumber}.png`}
           alt="Playing dice"
@@ -81,15 +78,23 @@ function App() {
         />
       )}
       <button className="btn btn--new" onClick={handleNewGame}>
-        New game
+      🔁 New game
       </button>
-      <button className="btn btn--roll" onClick={handleRollDice}>
-        Roll dice
+      <button className="btn btn--roll" onClick={handleRollDice} disabled={finishedPlaying}>
+      🎲 Roll dice
       </button>
-      <button className="btn btn--hold" onClick={handleHold}>
-        Hold
+      <button className="btn btn--hold" onClick={handleHold} disabled={finishedPlaying}>
+      📥 Hold
       </button>
     </main>
-  );
+  )
 }
-export default App;
+
+export default App
+
+
+
+
+
+
+
