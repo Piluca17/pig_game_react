@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/pig_game_react/static/css/main.bab72188.css",
+    "main.js": "/pig_game_react/static/js/main.63ae5672.js",
+    "static/js/592.8ff8bae2.chunk.js": "/pig_game_react/static/js/592.8ff8bae2.chunk.js",
+    "index.html": "/pig_game_react/index.html",
+    "main.bab72188.css.map": "/pig_game_react/static/css/main.bab72188.css.map",
+    "main.63ae5672.js.map": "/pig_game_react/static/js/main.63ae5672.js.map",
+    "592.8ff8bae2.chunk.js.map": "/pig_game_react/static/js/592.8ff8bae2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bab72188.css",
+    "static/js/main.63ae5672.js"
+  ]
+}
