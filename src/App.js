@@ -52,7 +52,7 @@ function App() {
     }
   }, [diceNumber]);
 
-  const finishedPlaying = Math.max(...score) >= 10 ? true : false;
+  const finishedPlaying = Math.max(...score) >= 100 ? true : false;
   // 3. pasar las variables de estado y las funciones a los componentes Player y Dice
   return (
     <main>
